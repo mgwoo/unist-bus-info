@@ -6,8 +6,8 @@ header('Content-Type: application/json; charset=utf-8;');
 
 /*
 if(!isset($_POST["mode"]) || !isset($_GET['way'])) {
-	echo "Wrong ACCESS! \n";
-	die;
+    echo "Wrong ACCESS! \n";
+    die;
 }
  */
 
