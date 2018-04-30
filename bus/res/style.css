@@ -1,0 +1,186 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* 
+ * Nanum Gothic (Korean) http://www.google.com/webfonts/earlyaccess
+ */
+
+@import url(http://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+
+body, div, p {
+	font-family:'Nanum Gothic', sans-serif;
+}
+
+body {
+	margin:0px;
+	color:#333;
+	background:#eee;
+}
+
+#top {
+	height:50px;
+}
+
+#menu {
+	text-align:center;
+	color:#666;
+	background:#666;
+}
+
+#main {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+
+	margin:0px;
+	font-size:medium;
+}
+
+#main .ui-title {
+	margin: .5em .8em;
+}
+
+#main .ui-header .ui-btn {
+    background: none;
+    border: none;
+    top: 14px;
+}
+#main .ui-header .ui-btn-inner {
+    border: none;
+}
+
+
+#loadimg {  
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index:1000;
+    background-color:white;
+    opacity: .5;
+ }
+
+.ajax-loader {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -16px; /* -1 * image width / 2 */
+    margin-top: -16px;  /* -1 * image height / 2 */
+    display: block;     
+}
+
+.title{ 
+	background-color:#fff;
+	font-family:'Nanum Gothic', sans-serif;
+	width:100%;
+	max-width:700px;
+	padding:8px; 
+    margin-left: auto;
+    margin-right: auto;
+	margin-top: 5px;
+	margin-bottom:  5px;
+	border:1px solid #000;
+	border-radius: 15px;
+	-moz-border-radius: 15px;
+	-webkit-border-radius: 15px;
+	-o-border-radius: 15px;
+}
+
+.context{
+	background-color:#fff;
+	width:100%;
+	max-width:700px;
+	font-family:'Nanum Gothic', sans-serif;
+	padding:8px; 
+    margin-left: auto;
+    margin-right: auto;
+	margin-top: 5px;
+	margin-bottom:  5px;
+	border:1px solid #000;
+	border-radius: 15px;
+	-moz-border-radius: 15px;
+	-webkit-border-radius: 15px;
+	-o-border-radius: 15px;
+}
+
+.ui-panel-content-wrap.ui-body-d.ui-panel-animate.ui-panel-content-wrap-position-left.ui-panel-content-wrap-display-reveal.ui-panel-content-wrap-open {
+	background:#eee;
+}
+
+.ui-panel-content-wrap.ui-body-d.ui-panel-animate.ui-panel-content-wrap-closed {
+	background:#eee;
+}
+
+.ui-content {
+	background:#eee;
+}
+
+#lf {
+	width:20%;
+	max-width:50px;
+	text-align:center;
+	font-weight:bold;
+	font-size:x-large;
+}
+
+#md {
+	width:29%;
+	margin-top:5px;
+	margin-bottom:5px;
+	text-align:center;
+}
+
+#rg {
+	padding-top:5px;
+	padding-bottom:5px;
+	text-align:center;
+	margin:auto;
+}
+
+#title {
+	font-size:x-large;
+	font-weight:bold;
+	text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#dir {
+	text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#time {
+	max-width:700px;
+	text-align: right;
+	font-size: small;
+	margin:auto;
+}
+
+@media only screen and (max-width: 320px) {
+	#title {
+			font-size:large;
+	}
+	#lf {
+			font-size:large;
+	}
+	#md, #rg, #dir {
+		font-size:small;
+	}
+}
+
+@media only screen and (min-width: 450px) {
+	#title {
+			font-size:xx-large;
+	}
+	#lf {
+			font-size:xx-large;
+	}
+	#md, #rg, #dir {
+		font-size:large;
+	}
+}
