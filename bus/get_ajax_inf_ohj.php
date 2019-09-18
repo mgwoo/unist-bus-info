@@ -18,6 +18,7 @@ $debug = $_GET["debug"];
 if($mode == "notice")
 {
     $noticeCont = array( 
+		array("date" => "19.9.18", "content" => "304 대곡 지원 폐지, 233의 우미린1차 경유 업데이트 및 유니스트 정류장의 일부 오류가 수정 되었습니다!")
         array("date" => "18.3.12", "content" => "433(삭제), 743 버스 정보가 업데이트되었습니다!"),
         array("date" => "17.10.1", "content" => "오현준(dhguswns23)님의 도움으로 nodeJS 기반 Front-end 개선을 완료하였습니다.\n사이트가 상당히 깔끔해졌어요!"),
         array("date" => "17.7.10", "content" => "노선이 순환으로 변경된 337 정보를 업데이트 하였습니다.\n공업탑과 삼산을 경유하는 357 정보도 함께 업데이트 하였습니다."),
@@ -53,17 +54,15 @@ else if($mode == "unist")
     //print_r($us_337);
 
     // Due to strange ULSAN INFO!
-    $ey_337 = GetJsonBusData($way, '337','196103373', '40228');
-    $ey_304J = GetJsonBusData($way, '304J','196103042', '40234');
-    $ey_304D = GetJsonBusData($way, '304D','196103044', '40234');
+    //$ey_337 = GetJsonBusData($way, '337','196103373', '40228');
+    $ey_304 = GetJsonBusData($way, '304','196103042', '40234');
     
     $us_133 = GetJsonBusData($way, "133", "194101332", "40234");
     $us_233 = GetJsonBusData($way, "233", "196102332", "40234");
     $us_733 = GetJsonBusData($way, "733", "196107332", "40234");
     $us_743 = GetJsonBusData($way, "743", "193107432", "40234");
 
-    $us_304_down = GetJsonBusData($way, "304J", "196103041", "40234");
-    $us_304_up = GetJsonBusData($way, "304D", "196103043", "40234");
+    $us_304 = GetJsonBusData($way, "304", "196103041", "40234");
 
     $saveData = array("mainTitle" => "UNIST",
                     "group"=> array(array("title" => "UNIST", 
@@ -71,43 +70,38 @@ else if($mode == "unist")
                                 "buses" => array($us_133,$us_233,$us_337,$us_733)),
                               array("title" => "UNIST",
                                 "subTitle" => "천상경유, 울산대 방향", 
-                                "buses" => array($us_304_down, $us_304_up, $us_743)),
+                                "buses" => array($us_304, $us_743)),
                               array("title" => "UNIST",
                                 "subTitle" => "KTX울산역, 언양정류장 방향\n(J:작천정, D:대곡)",
-                                "buses" => array($ey_337, $ey_304J, $ey_304D))));
+                                "buses" => array($ey_304))));
     echo urldecode(json_encode($saveData, ($debug == 1)? JSON_PRETTY_PRINT+JSON_UNESCAPED_UNICODE : JSON_UNESCAPED_UNICODE));
 }
 //UNIST Entrance
 else if($mode == "unistEntrance")
 {
-    $ey_327 = GetJsonBusData($way, "327", "196103273", "40229");
-    $ey_357 = GetJsonBusData($way, "327", "196103573", "40229");
-    $ey_807 = GetJsonBusData($way, "807", "196108073", "40229");
-    $ey_304D = GetJsonBusData($way, "304D", "196103044", "40229");
+    $ey_327 = GetJsonBusData($way, "327", "196103273", "40230");
+    $ey_357 = GetJsonBusData($way, "357", "196103573", "40230");
+    $ey_807 = GetJsonBusData($way, "807", "196108073", "40230");
+	$ey_857 = GetJsonBusData($way, "857", "196108573", "40230");
 
     $uni_133 = GetJsonBusData($way, "133", "194101331", "40230");
     $uni_233 = GetJsonBusData($way, "233", "196102331", "40230");
     $uni_733 = GetJsonBusData($way, "733", "196107331", "40230");
     $uni_743 = GetJsonBusData($way, "743", "193107431", "40230");
     $uni_337U = GetJsonBusData($way, "337", "196103373", "40230");
-    $uni_304DU;
-    $uni_304DE;
-    $uni_304JU;
-    $uni_304JE;
 
     // Due to strange ULSAN INFO! (40230 -> 40228)
-    $uni_337E = GetJsonBusData($way, "337", "196103373", "40228");
+    $uni_337E = GetJsonBusData($way, "337", "196103373", "40203");
 
-    $uni_304J = GetJsonBusData($way, "304J", "196103041", "40230");
-    $uni_304D = GetJsonBusData($way, "304D", "196103043", "40230");
+    $uni_304 = GetJsonBusData($way, "304", "196103041", "40230");
 
     $saveData = array("mainTitle" => "UNIST입구",
                     "group"=> array(array("title" => "UNIST입구", 
                                 "subTitle" => "UNIST 방향",
-                                "buses" => array($uni_133,$uni_233,$uni_733,$uni_743,$uni_337U, $uni_337E, $uni_304J, $uni_304D)),
+                                "buses" => array($uni_133, $uni_233, $uni_733, $uni_743, $uni_337U, $uni_337E, $uni_304)),
                               array("title" => "UNIST 입구",
                                 "subTitle" => "KTX울산역, 언양정류장 방향", 
-                                "buses" => array($ey_327, $ey_357, $ey_807))));
+                                "buses" => array($ey_327, $ey_357, $ey_807, $ey_857))));
     echo urldecode(json_encode($saveData, ($debug == 1)? JSON_PRETTY_PRINT+JSON_UNESCAPED_UNICODE : JSON_UNESCAPED_UNICODE));
 }
 //UNIST sandan 
@@ -129,7 +123,7 @@ else if($mode == "unistIndust")
 else if($mode == "ey_stat")
 {
     // data URL from its.ulsan.kr
-    $us_304_down = GetJsonBusData($way, "304J", "196103041", "30348");
+    $us_304_down = GetJsonBusData($way, "304", "196103041", "30348");
     $us_327 = GetJsonBusData($way, "327", "196103273", "30348");
     $us_337 = GetJsonBusData($way, "337", "196103373", "30348");
     $us_357 = GetJsonBusData($way, "357", "196103573", "30348");
@@ -149,8 +143,7 @@ else if($mode == "ey_stat")
 else if($mode == "ktx")
 {
     // data URL from its.ulsan.kr
-    $us_304_down = GetJsonBusData($way, "304J", "196103041", "15414");
-    $us_304_up = GetJsonBusData($way, "304D", "196103043", "15414");
+    $us_304_down = GetJsonBusData($way, "304", "196103041", "15414");
     $us_327 = GetJsonBusData($way, "327", "196103273", "15414");
     $us_337 = GetJsonBusData($way, "337", "196103373", "15414");
     $us_357 = GetJsonBusData($way, "357", "196103573", "15414");
@@ -159,7 +152,7 @@ else if($mode == "ktx")
     $saveData = array("mainTitle" => "KTX울산역",
                     "group"=> array(array("title" => "KTX울산역",
                                 "subTitle" => "UNIST 방향",
-                                "buses" => array($us_304_down,$us_304_up, $us_337)),
+                                "buses" => array($us_304_down, $us_337)),
                               array("title" => "KTX울산역",
                                 "subTitle" => "UNIST 방향, UNIST 미경유\n사연, 과기원입구 환승", 
                                 "buses" => array($us_327, $us_357, $us_807))));
@@ -175,8 +168,7 @@ else if($mode == "chunsang_ey")
     $ey_733 = GetJsonBusData($way, "733", "196107331", "40213");
 
 //    $ey_337 = GetJsonBusData($way, "337", "196103373", "40213");
-    $ey_304J = GetJsonBusData($way, "304J", "196103042", "15514");
-    $ey_304D = GetJsonBusData($way, "304D", "196103044", "15514");
+    $ey_304 = GetJsonBusData($way, "304", "196103042", "15514");
 
     $ey_327 = GetJsonBusData($way, "327", "196103273", "40213");
     $ey_807 = GetJsonBusData($way, "807", "196108073", "40213");
@@ -191,7 +183,7 @@ else if($mode == "chunsang_ey")
     $saveData = array("mainTitle" => "천상1교 사거리 - 학교행",
                     "group"=> array(array("title" => "천상1교 사거리",
                                 "subTitle" => "UNIST 방향",
-                                "buses" => array($ey_133, $ey_733,$ey_304J, $ey_304D)),
+                                "buses" => array($ey_133, $ey_733, $ey_304)),
                               array("title" => "천상1교 사거리",
                                 "subTitle" => "KTX울산역 방향, UNIST 미경유",
                                 "buses" => array($ey_327, $ey_807))));
@@ -215,8 +207,7 @@ else if($mode == "chunsang_us")
     $us_317 = GetJsonBusData($way, "317", "196103171", "40214");
 //    $us_433 = GetJsonBusData($way, "433", "196104332", "40214");
     
-    $ch_304J = GetJsonBusData($way, "304J", "196103041", "15513");
-    $ch_304D = GetJsonBusData($way, "304D", "196103043", "15513");
+    $ch_304 = GetJsonBusData($way, "304", "196103041", "15513");
     $ch_357 = GetJsonBusData($way, "357", "196103573", "15513");
         
     $saveData = array("mainTitle" => "천상1교 사거리 - 울산행",
@@ -225,7 +216,7 @@ else if($mode == "chunsang_us")
                                 "buses" => array($us_133, $us_317,$us_327, $us_733, $us_807, $us_5005)),
                               array("title" => "천상1교 사거리",
                                 "subTitle" => "천상 경유 태화강역 방향",
-                                "buses" => array($ch_304J, $ch_304D, $ch_357))));
+                                "buses" => array($ch_304, $ch_357))));
 
     echo urldecode(json_encode($saveData, ($debug == 1)? JSON_PRETTY_PRINT+JSON_UNESCAPED_UNICODE : JSON_UNESCAPED_UNICODE));
 }
@@ -234,8 +225,8 @@ else if($mode == "90ri_good")
 {
     // data URL from its.ulsan.kr
     $ey_133 = GetJsonBusData($way, "133", "194101331", "20424");
-    $ey_733 = GetJsonBusData($way, "733", "196107331", "20424");
-
+    $ey_233 = GetJsonBusData($way, "233", "196102331", "20424");
+	$ey_733 = GetJsonBusData($way, "733", "196107331", "20424");
 
     $ey_327 = GetJsonBusData($way, "327", "196103273", "20424");
 //    $ey_433 = GetJsonBusData($way, "433", "196104331", "20424");
@@ -244,7 +235,7 @@ else if($mode == "90ri_good")
     $saveData = array("mainTitle" => "구영리/굿모닝힐",
                     "group"=> array(array("title" => "구영리/굿모닝힐",
                                 "subTitle" => "UNIST 방향",
-                                "buses" => array($ey_133, $ey_733)),
+                                "buses" => array($ey_133, $ey_233, $ey_733)),
                               array("title" => "구영리/굿모닝힐",
                                 "subTitle" => "UNIST미경유, 천상1교사거리 환승",
                                 "buses" => array($ey_327, $ey_807))));
@@ -256,12 +247,13 @@ else if($mode == "90ri_umirin_01")
 {
     // data URL from its.ulsan.kr
     $ey_133 = GetJsonBusData($way, "133", "194101331", "20422");
+	$ey_233 = GetJsonBusData($way, "233", "196102331", "20422");
     $ey_733 = GetJsonBusData($way, "733", "196107331", "20422");
 
     $saveData = array("mainTitle" => "구영리/우미린1차",
                     "group"=> array(array("title" => "구영리/우미린1차",
                                 "subTitle" => "UNIST방향",
-                                "buses" => array($ey_133, $ey_733))));
+                                "buses" => array($ey_133, $ey_233, $ey_733))));
 
     echo urldecode(json_encode($saveData, ($debug == 1)? JSON_PRETTY_PRINT+JSON_UNESCAPED_UNICODE : JSON_UNESCAPED_UNICODE));
 }
@@ -270,6 +262,7 @@ else if($mode == "90ri_umirin_02")
 {
     // data URL from its.ulsan.kr
     $ey_133 = GetJsonBusData($way, "133", "194101331", "20416");
+	$ey_233 = GetJsonBusData($way, "233", "196102331", "20416");
     $ey_733 = GetJsonBusData($way, "733", "196107331", "20416");
     $ey_5002 = GetJsonBusData($way, "5002", "196150022", "20416");
     $ey_5005 = GetJsonBusData($way, "5005", "196150052", "20416");
@@ -277,7 +270,7 @@ else if($mode == "90ri_umirin_02")
     $saveData = array("mainTitle" => "구영리/우미린2차",
                     "group"=> array(array("title" => "구영리/우미린2차",
                                 "subTitle" => "UNIST방향",
-                                "buses" => array($ey_133, $ey_733)),
+                                "buses" => array($ey_133, $ey_233, $ey_733)),
                               array("title" => "구영리/우미린2차",
                                 "subTitle" => "KTX울산역 방향, UNIST 미경유",
                                 "buses" => array($ey_5002, $ey_5005))));
@@ -292,7 +285,6 @@ else if($mode == "90ri_deri")
     $ey_733 = GetJsonBusData($way, "733", "196107331", "20414");
 
     $ey_327 = GetJsonBusData($way, "327", "196103273", "20414");
-//    $ey_433 = GetJsonBusData($way, "433", "196104331", "20414");
     $ey_807 = GetJsonBusData($way, "807", "196108073", "20414");
 
     $saveData = array("mainTitle" => "구영리/대리마을",
@@ -345,8 +337,7 @@ else if($mode == "sinbok")
 else if($mode == "ulde")
 {
     // data URL from its.ulsan.kr
-    $ey_304J = GetJsonBusData($way, "304J", "196103042", "30708");
-    $ey_304D = GetJsonBusData($way, "304D", "196103044", "30708");
+    $ey_304 = GetJsonBusData($way, "304", "196103042", "30708");
     $ey_733 = GetJsonBusData($way, "733", "196107331", "30708");
     $ey_743 = GetJsonBusData($way, "743", "193107431", "30708");
     $ey_307 = GetJsonBusData($way, "307", "196103071", "30708");
@@ -355,7 +346,7 @@ else if($mode == "ulde")
     $saveData = array("mainTitle" => "울산대학교",
                     "group"=> array(array("title" => "울산대학교",
                                 "subTitle" => "UNIST방향",
-                                "buses" => array($ey_304J, $ey_304D, $ey_733, $ey_743)),
+                                "buses" => array($ey_304, $ey_733, $ey_743)),
                               array("title" => "울산대학교",
                                 "subTitle" => "UNIST방향, UNIST미경유\n천상1교사거리 환승",
                                 "buses" => array($ey_307)),
@@ -415,7 +406,7 @@ else if($mode == "terminal")
                                 "buses" => array($ey_133, $ey_337, $ey_733, $ey_743)),
                               array("title" => "시외고속버스터미널",
                                 "subTitle" => "UNIST방향, UNIST미경유\n사연, 과기원 입구 환승",
-                                "buses" => array($ey_307, $ey_317, $ey_327, $ey_357,$ey_807))));
+                                "buses" => array($ey_307, $ey_317, $ey_327, $ey_357, $ey_807))));
 
     echo urldecode(json_encode($saveData, ($debug == 1)? JSON_PRETTY_PRINT+JSON_UNESCAPED_UNICODE : JSON_UNESCAPED_UNICODE));
 }
