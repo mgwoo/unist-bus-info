@@ -18,7 +18,7 @@ $debug = $_GET["debug"];
 if($mode == "notice")
 {
     $noticeCont = array( 
-		array("date" => "19.9.18", "content" => "304 대곡 지원 폐지, 233의 우미린1차 경유 업데이트 및 유니스트 정류장의 일부 오류가 수정 되었습니다!")
+		array("date" => "19.9.21", "content" => "304 대곡 지원 폐지, 233의 우미린1차 경유 업데이트 및 유니스트 정류장의 일부 오류가 수정 되었습니다.")
         array("date" => "18.3.12", "content" => "433(삭제), 743 버스 정보가 업데이트되었습니다!"),
         array("date" => "17.10.1", "content" => "오현준(dhguswns23)님의 도움으로 nodeJS 기반 Front-end 개선을 완료하였습니다.\n사이트가 상당히 깔끔해졌어요!"),
         array("date" => "17.7.10", "content" => "노선이 순환으로 변경된 337 정보를 업데이트 하였습니다.\n공업탑과 삼산을 경유하는 357 정보도 함께 업데이트 하였습니다."),
@@ -90,7 +90,7 @@ else if($mode == "unistEntrance")
     $uni_743 = GetJsonBusData($way, "743", "193107431", "40230");
     $uni_337U = GetJsonBusData($way, "337", "196103373", "40230");
 
-    // Due to strange ULSAN INFO! (40230 -> 40228)
+    // Due to strange ULSAN INFO! (40230 -> 40203)
     $uni_337E = GetJsonBusData($way, "337", "196103373", "40203");
 
     $uni_304 = GetJsonBusData($way, "304", "196103041", "40230");
